@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-generator
+  template:
+    metadata:
+      labels:
+        app: log-generator
+    spec:
+      containers:
+        - name: log-generator
+          image: docker.io/maya987/logs_gen:latest
+          volumeMounts:
+            - name: log-volume
+              mountPath: /var/log   # Mount to /var/log for log generation
+      volumes:
+        - name: log-volume
+          persistentVolumeClaim:
+            claimName: log-pvc
