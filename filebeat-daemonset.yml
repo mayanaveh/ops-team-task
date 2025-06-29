@@ -20,9 +20,6 @@ spec:
               subPath: filebeat.yml
             - name: varlog
               mountPath: /var/log
-          env:
-            - name: ELASTICSEARCH_HOSTS
-              value: "http://elasticsearch:9200"
       volumes:
         - name: config
           configMap:
